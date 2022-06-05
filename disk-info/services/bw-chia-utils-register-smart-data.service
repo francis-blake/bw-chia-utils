@@ -1,0 +1,12 @@
+# upload this file to /etc/systemd/system and edit to your needs adjusting your user in the path
+
+[Unit]
+Description=Run register-smart-data.sh
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/bash -c "/home/<your-user>/bw-chia-utils/register-smart-data.sh"
+
+[Install]
+WantedBy=timers.target
