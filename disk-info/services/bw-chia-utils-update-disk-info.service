@@ -5,9 +5,11 @@ Description=Run disk-info.sh
 
 [Service]
 Type=simple
-User=root
+User=<your user>
+Group=<your group>
 WorkingDirectory=/home/<your-user>/bw-chia-utils/disk-info
-ExecStart=/usr/bin/node -c "/home/<your-user>/bw-chia-utils/disk-info/disk-info.js"
+ExecStart=/home/<your-user>/bw-chia-utils/disk-info/disk-info.js
 
 [Install]
 WantedBy=timers.target
+WantedBy=multi-user.target
