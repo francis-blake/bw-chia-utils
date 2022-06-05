@@ -78,7 +78,9 @@ function processLine(line, regexp) {
       if (stdout) {
         let devLine = stdout.split("\n")[1];
         let parts = devLine.split(" ");
-        let data = getDeviceData(parts[0], parts.pop().split("/").pop());
+        let label = parts.pop().split("/").pop();
+        if (!label) label = "system";
+        let data = getDeviceData(parts[0], label);
       }
     });
   }
