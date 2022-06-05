@@ -1,6 +1,7 @@
 #!/bin/bash
 
 DIR="$(pwd)/logs/disk-data";
+cd $DIR;
 if [ ! -d $DIR/dev ]; then
   mkdir -p $DIR/dev;
 fi

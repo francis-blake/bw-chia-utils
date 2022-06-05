@@ -6,7 +6,7 @@ Description=Run disk-info.sh
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/bin/node -c "/home/<your-user>/bw-chia-utils/disk-info.js"
+ExecStart=/usr/bin/node -c "/home/<your-user>/bw-chia-utils/disk-info/disk-info.js"
 
 [Install]
 WantedBy=timers.target

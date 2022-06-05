@@ -6,7 +6,7 @@ Description=Run register-smart-data.sh
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/bin/bash -c "/home/<your-user>/bw-chia-utils/register-smart-data.sh"
+ExecStart=/usr/bin/bash -c "/home/<your-user>/bw-chia-utils/disk-info/register-smart-data.sh"
 
 [Install]
 WantedBy=timers.target
