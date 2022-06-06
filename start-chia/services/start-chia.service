@@ -5,6 +5,7 @@ Description=Run start-chia.sh
 
 [Service]
 Type=oneshot
+OnBootSec=60
 # adjust to your user
 User=<your-user>
 # adjust to your group
