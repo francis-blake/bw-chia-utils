@@ -5,26 +5,29 @@ Description=Run start-chia.sh
 
 [Service]
 Type=oneshot
-User=<user> # adjust to your user
-Group=<group> # adjust to your group
-WorkingDirectory=/home/<your-user>/bw-chia-utils/start-chia # adjust to your path
+# adjust to your user
+User=<your-user>
+# adjust to your group
+Group=<your-group>
+# adjust to your path
+WorkingDirectory=/home/<your-user>/bw-chia-utils/start-chia
 
 # chose an option and adjust to your path
-ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<user>/chia-blockchain farmer  
-# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<user>/chia-blockchain all
-# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<user>/chia-blockchain node
-# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<user>/chia-blockchain harvester
-# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<user>/chia-blockchain farmer-no-wallet
-# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<user>/chia-blockchain farmer-only
-# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<user>/chia-blockchain timelord
-# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<user>/chia-blockchain timelord-only
-# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<user>/chia-blockchain timelord-launcher-only
-# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<user>/chia-blockchain wallet
-# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<user>/chia-blockchain introducer
-# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<user>/chia-blockchain simulator
-# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<user>/chia-blockchain crawler
-# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<user>/chia-blockchain seeder
-# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<user>/chia-blockchain seeder-only
+ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<your-user>/chia-blockchain farmer  
+# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<your-user>/chia-blockchain all
+# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<your-user>/chia-blockchain node
+# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<your-user>/chia-blockchain harvester
+# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<your-user>/chia-blockchain farmer-no-wallet
+# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<your-user>/chia-blockchain farmer-only
+# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<your-user>/chia-blockchain timelord
+# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<your-user>/chia-blockchain timelord-only
+# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<your-user>/chia-blockchain timelord-launcher-only
+# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<your-user>/chia-blockchain wallet
+# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<your-user>/chia-blockchain introducer
+# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<your-user>/chia-blockchain simulator
+# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<your-user>/chia-blockchain crawler
+# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<your-user>/chia-blockchain seeder
+# ExecStart=/home/<your-user>/bw-chia-utils/start-chia/start-chia.sh /home/<your-user>/chia-blockchain seeder-only
 
 [Install]
 WantedBy=multi-user.target
