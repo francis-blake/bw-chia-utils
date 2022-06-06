@@ -1,0 +1,20 @@
+# upload this file to /etc/systemd/system and edit to your needs adjusting your user in the path
+
+[Unit]
+Description=start chiadog
+
+[Service]
+Type=oneshot
+OnBootSec=60
+# adjust to your user
+User=<your-user>
+# adjust to your group
+Group=<your-group>
+# adjust to your path
+WorkingDirectory=/home/<your-user>/bw-chia-utils/start-chiadog
+
+# Adjust to your path
+ExecStart=/home/<your-user>/bw-chia-utils/start-chiadog/start-chiadog.sh /home/<your-user>/chiadog
+
+[Install]
+WantedBy=multi-user.target
