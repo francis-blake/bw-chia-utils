@@ -1,7 +1,8 @@
 ## Overview
 
 This script is a simple to use bash file to start chia services and a service file to start it after boot up.
-Ready to adjust to your case and drop into `/etc/systemd/system` as system service but on behalf of your user.
+
+It's ready to adjust to your case and drop into `/etc/systemd/system` as system service but run on behalf of your user.
 
 ## Instalation
 
