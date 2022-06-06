@@ -23,7 +23,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable start-chiadog.service
 ```
 
-# if you want to start CHIADOG immediately:
+### if you want to start CHIADOG immediately:
 
 6. Start the service
 
