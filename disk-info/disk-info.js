@@ -9,11 +9,11 @@ const https = require("https");
 const fs = require("fs");
 const { exec } = require("child_process");
 const api_host = process.env.API_HOST;
-const login_uri = "/api/sanctum/token";
-const disk_info_uri = "/api/disks";
+const login_uri = process.env.API_LOGIN_URI;
+const disk_info_uri = process.env.API_DISKS_URI;
 let api_token = "";
 let logged_in = 0;
-const api_email = process.env.API_EMAIL;
+const api_user = process.env.API_USER;
 const api_password = process.env.API_PASSWORD;
 const api_port = process.env.API_PORT;
 const home_folder = process.env.HOME_FOLDER;
@@ -198,7 +198,7 @@ function sendInfo(b) {
 function login() {
   if (login.pending) return login.pending;
   const data = JSON.stringify({
-    email: api_email,
+    email: api_user,
     password: api_password,
     device_name: device_name,
   });
