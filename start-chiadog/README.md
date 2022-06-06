@@ -10,7 +10,7 @@ _Make sure you make adjustments to your needs by changing user, group and servic
 
 1. Clone the repo
 2. Copy `bw-chia-utils/start-chiadog/services/start-chiadog.service` to `/etc/systemd/system` using `sudo`
-3. Edit the file `/etc/systemd/system/start-chiadog.service` and change your user and group as well as your `home directory` and `chiadog` paths.
+3. Edit the file `/etc/systemd/system/start-chiadog.service` and change your `user` and `group` as well as your `home directory` and `chiadog` paths.
 4. Reload system control daemon:
 
 ```
@@ -22,6 +22,8 @@ sudo systemctl daemon-reload
 ```
 sudo systemctl enable start-chiadog.service
 ```
+
+# if you want to start CHIADOG immediately:
 
 6. Start the service
 

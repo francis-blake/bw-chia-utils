@@ -25,6 +25,8 @@ sudo systemctl daemon-reload
 sudo systemctl enable start-chia.service
 ```
 
+# if you want to start CHIA immediately:
+
 7. Start the service
 
 ```
