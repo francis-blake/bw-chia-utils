@@ -18,11 +18,16 @@ This scripts reads the log created by `madmax` (not work with `bladebit`) and re
 
 4. Open a session using screen to leave this script running in background:
 
+--type: NFT or OG
+--harvester: The name as you know the harvester where final destination is
+--disk: The name as you know the final destination disk
+--notes: (optional) In this field you can add what you want. The number of threads will appear automatically here after any other note.
+
 ```
 screen -S add-new-chia-plots
 
 cd /home/<username>/bw-chia-utils/add-new-chia-plots
-./add-new-chia-plots.js
+./add-new-chia-plots.js --type="<type>" --harvester="<harvester-name>" --disk="<final-disk-name>" --notes="<optional-notes>"
 ```
 
 Press `CTRL+A D` to exit Screen session
