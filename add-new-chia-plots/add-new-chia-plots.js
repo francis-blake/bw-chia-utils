@@ -215,7 +215,7 @@ function getPlotRate(p) {
         return;
       }
 
-      grepWithFslogs/retrieving_proofs.log", "Proofs ", processRate);
+      grepWithFs("logs/retrieving_proofs.log", "Proofs ", processRate);
     }
   );
 }
@@ -346,13 +346,13 @@ function postRequest(uri, body) {
 }
 
 function logIt(plot, result) {
-  let log = fs.createWriteStream("logs/processed_plots.log", {
+  let log = fs.createWriteStream("./logs/processed_plots.log", {
     flags: "a",
   });
   log.write(JSON.stringify(plot));
   log.write(",\n");
 
-  let log2 = fs.createWriteStream("logs/processed_plots_status.log", {
+  let log2 = fs.createWriteStream("./logs/processed_plots_status.log", {
     flags: "a",
   });
 
