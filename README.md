@@ -15,7 +15,7 @@ Not all people register their plots in a database or excel, but I do that. It's 
 That can be exhausting if done manually but using this script all I have to do is plot and a watching new plots automatically registered in a database or in my case in a front-end interface.
 
 This script is called with 3 parameters (harvester name, disk name, and notes) to join to the rest of the gathered information. It reads the plotting `stdout` of the plotting process (only for `madmax`) and registers ID, tmp device, plot time, phases time, copy time, file size and in the end it uses `chia plots check` to register also the plot rate.
-During the process an API endpoint is called to give progress % of plot creation, and in the end the `JSON` object of the plot is sent in a `POST` to another endpoint.
+During the process an API endpoint is called to give progress % of plot creation, and in the end the `JSON` object of the plot is sent in a `POST` to another API method.
 
 In my case I use the progress to update a front-end interface with a progress-bar.
 

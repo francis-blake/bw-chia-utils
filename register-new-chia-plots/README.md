@@ -60,7 +60,7 @@ _this `>~/plots.log 2>&1` outputs the plot log to a `plot.log` in your `home dir
 
 ## In conclusion
 
-When a plot is finished and placed in its final directory and API endpoint is called an `JSON` like this will be sent:
+When a plot is finished and placed in its final directory an API endpoint is called and a `JSON` like this will be sent:
 
 ```json
 {
