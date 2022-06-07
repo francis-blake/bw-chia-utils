@@ -26,8 +26,10 @@ let notes;
 let proofsRate;
 let plotToSend;
 
+setNewPlot();
+
 // SETUP ALL Temporary Drives
-const tmpDrives = require("temporary-devices.json");
+const tmpDrives = require("./temporary-devices.json");
 
 // Mandatoy ARGS
 if (!args["harvester"]) {
@@ -57,8 +59,6 @@ function processArguments() {
   args["notes"] ? (notes = args["notes"]) : (notes = "");
   args["type"] ? (newPlot.plot_type = args["type"]) : (newPlot.plot_type = "");
 }
-
-setNewPlot();
 
 // START READING LOG
 console.log(
