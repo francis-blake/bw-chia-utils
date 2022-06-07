@@ -201,12 +201,12 @@ function getPlotRate(p) {
       home_folder +
       "/chia-blockchain; . ./activate; cd " +
       home_folder +
-      "/bw-chia-utils/add-new-plots; chia plots check -g " +
+      "/bw-chia-utils/add-new-chia-plots; chia plots check -g " +
       p.id +
-      " > ./logs/retrieving_proofs.log 2>&1; deactivate;",
+      " > logs/retrieving_proofs.log 2>&1; deactivate;",
     (err, stdout, stderr) => {
       if (err) {
-        let log = fs.createWriteStream("./logs/plots_resumo_errors.log", {
+        let log = fs.createWriteStream("logs/plots_resumo_errors.log", {
           flags: "a",
         });
         log.write(" could not get proofs of " + p.id + "\n");
@@ -215,7 +215,7 @@ function getPlotRate(p) {
         return;
       }
 
-      grepWithFs("./logs/retrieving_proofs.log", "Proofs ", processRate);
+      grepWithFslogs/retrieving_proofs.log", "Proofs ", processRate);
     }
   );
 }
@@ -346,13 +346,13 @@ function postRequest(uri, body) {
 }
 
 function logIt(plot, result) {
-  let log = fs.createWriteStream("./logs/processed_plots.log", {
+  let log = fs.createWriteStream("logs/processed_plots.log", {
     flags: "a",
   });
   log.write(JSON.stringify(plot));
   log.write(",\n");
 
-  let log2 = fs.createWriteStream("./logs/processed_plots_status.log", {
+  let log2 = fs.createWriteStream("logs/processed_plots_status.log", {
     flags: "a",
   });
 
