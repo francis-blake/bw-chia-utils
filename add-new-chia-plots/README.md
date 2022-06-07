@@ -25,7 +25,8 @@ cd /home/<username>/bw-chia-utils/add-new-chia-plots
 ./add-new-chia-plots.js
 ```
 
-Press `CTRL+D` to exit Screen session
+Press `CTRL+A D` to exit Screen session
+_To return type `screen -r` and if multiple screens are running a list will appear and you may `screen -r <process number>`_
 
 5. Open another session with screen to start plot (if your session drops, session inside screen are kept alive):
 
@@ -37,5 +38,7 @@ cd /home/<username>/chia-blockchain
 chia plotters madmax ... your configuration ... >~/plots.log 2>&1
 ```
 
-Press `CTRL+D` to exit Screen session
+Press `CTRL+A D` to exit Screen session
+_To return type `screen -r` and if multiple screens are running a list will appear and you may `screen -r <process number>`_
+
 _this `>~/plots.log 2>&1` outputs the plot log to a `plot.log` in your `home directory`_
