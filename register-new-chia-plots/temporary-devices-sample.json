@@ -1,0 +1,14 @@
+[
+  {
+    "path": "/mnt/<disk-name>/",
+    "name": "WD NVMe 1TB"
+  },
+  {
+    "path": "/mnt/<disk-name>/",
+    "name": "WD NVMe 500GB"
+  },
+  {
+    "path": "/mnt/<disk-name>/",
+    "name": "Sabrent Rocket Q NVMe 2TB"
+  }
+]
