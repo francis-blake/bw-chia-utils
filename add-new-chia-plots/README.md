@@ -18,14 +18,23 @@ This scripts reads the log created by `madmax` (not work with `bladebit`) and re
 
 4. Open a session using screen to leave this script running in background:
 
+--type: NFT or OG
+
+--harvester: The name as you know the harvester where final destination is
+
+--disk: The name as you know the final destination disk
+
+--notes: (optional) In this field you can add what you want. The number of threads will appear automatically here after any other note.
+
 ```
 screen -S add-new-chia-plots
 
 cd /home/<username>/bw-chia-utils/add-new-chia-plots
-./add-new-chia-plots.js
+./add-new-chia-plots.js --type="<type>" --harvester="<harvester-name>" --disk="<final-disk-name>" --notes="<optional-notes>"
 ```
 
-Press `CTRL+D` to exit Screen session
+Press `CTRL+A D` to exit Screen session
+_To return type `screen -r` and if multiple screens are running a list will appear and you may `screen -r <process number>`_
 
 5. Open another session with screen to start plot (if your session drops, session inside screen are kept alive):
 
@@ -37,5 +46,7 @@ cd /home/<username>/chia-blockchain
 chia plotters madmax ... your configuration ... >~/plots.log 2>&1
 ```
 
-Press `CTRL+D` to exit Screen session
+Press `CTRL+A D` to exit Screen session
+_To return type `screen -r` and if multiple screens are running a list will appear and you may `screen -r <process number>`_
+
 _this `>~/plots.log 2>&1` outputs the plot log to a `plot.log` in your `home directory`_
