@@ -17,11 +17,13 @@ This scripts reads the log created by `madmax` (not work with `bladebit`) and re
 
 1. Clone this repository
 
-2. Copy `temporary-devices-sample.json` to a new file `temporary-devices.json` and adjust it with path and name of all your used `tmp disks`
+2. `npm install`
 
-3. Fill your `.env` file based on `.env-sample`
+3. Copy `temporary-devices-sample.json` to a new file `temporary-devices.json` and adjust it with path and name of all your used `tmp disks`
 
-4. Open a session using screen to leave this script running in background:
+4. Fill your `.env` file based on `.env-sample`
+
+5. Open a session using screen to leave this script running in background:
 
 --type: NFT or OG
 
@@ -41,7 +43,7 @@ cd /home/<username>/bw-chia-utils/register-new-chia-plots
 Press `CTRL+A D` to exit Screen session
 _To return type `screen -r` and if multiple screens are running a list will appear and you may `screen -r <process number>`_
 
-5. Open another session with screen to start plot (if your session drops, session inside screen are kept alive):
+6. Open another session with screen to start plot (if your session drops, session inside screen are kept alive):
 
 ```
 screen -S plotting
