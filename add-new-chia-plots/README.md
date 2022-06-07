@@ -12,7 +12,7 @@ This scripts reads the log created by `madmax` (not work with `bladebit`) and re
 
 1. Clone this repository
 
-2. Fill `temporary-devices.json` with path and name of all your used `tmp disks`
+2. Copy `temporary-devices-sample.json` to a new file `temporary-devices.json` and adjust it with path and name of all your used `tmp disks`
 
 3. Fill your `.env` file based on `.env-sample`
 
