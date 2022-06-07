@@ -50,3 +50,31 @@ Press `CTRL+A D` to exit Screen session
 _To return type `screen -r` and if multiple screens are running a list will appear and you may `screen -r <process number>`_
 
 _this `>~/plots.log 2>&1` outputs the plot log to a `plot.log` in your `home directory`_
+
+## In conclusion
+
+When the plot process finishes with the plot in its final directory another API endpoint (configurable in your `.env` file) is called and an object like this is sent:
+
+```json
+{
+  "id": "plot-k32-2022-02-07-03-50-fakef6quopm1oa6bye6f7ry9l25ws3ewcbxobkhrfu4jyc3ywyt1r9ntb5fm5e9q",
+  "harvester": "Harvester #2",
+  "disk": "Disk 15",
+  "plot_type": "NFT",
+  "notes": "-r 24 Madmax",
+  "plot_size": "k32",
+  "plotted_at": "2022-02-07 03:50",
+  "plotting_progress": 1,
+  "file_size": 108785969825,
+  "plot_creation_times": {
+    "machine": "hopper",
+    "tmp": "WD NVMe 1TB",
+    "phase1": 1540.46,
+    "phase2": 595.221,
+    "phase3": 1106.36,
+    "phase4": 105.72,
+    "total_time": 3347,
+    "copy_time": 207
+  }
+}
+```
