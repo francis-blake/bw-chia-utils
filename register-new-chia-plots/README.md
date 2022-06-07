@@ -80,6 +80,7 @@ When a plot is finished and placed in its final directory and API endpoint is ca
   "plot_size": "k32",
   "plotted_at": "2022-02-07 13:54",
   "plotting_progress": 1,
-  "file_size": 108785969625
+  "file_size": 108785969625,
+  "rate": 1.3333
 }
 ```
