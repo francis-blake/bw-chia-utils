@@ -28,6 +28,6 @@ do
         then
             # echo "smartctl -i -A --json $e" >> "$DIR$e".json
             truncate -s 0 "$DIR$e".json
-            smartctl -iA --json $e >> "$DIR$e".json # Run smartctl into all disks that the host have
+            smartctl -iA -l devstat --json $e >> "$DIR$e".json # Run smartctl into all disks that the host have
     fi
 done
