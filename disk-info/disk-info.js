@@ -126,7 +126,7 @@ function getDeviceData(d, m) {
   let disk;
   let device;
   if (p[2].startsWith("sd")) {
-    disk = p[2].substring(0, 3);
+    disk = p[2].substring(0, p[2].length-1);
   } else if (p[2].startsWith("nvme")) {
     disk = p[2].substring(0, 5);
   }
