@@ -25,6 +25,9 @@ let newPlot = {};
 let notes;
 let proofsRate;
 let plotToSend;
+let finalDirectory;
+let tempDirectory;
+let moveDelayed = 0;
 
 setNewPlot();
 
@@ -33,15 +36,15 @@ const tmpDrives = require("./temporary-devices.json");
 
 // Mandatoy ARGS
 if (!args["harvester"]) {
-  console.log("add final harvester arg --harvester");
+  console.log("add harvester arg --harvester");
   return;
 }
 if (!args["disk"]) {
-  console.log("add final disk arg --disk");
+  console.log("add disk arg --disk");
   return;
 }
 if (!args["type"]) {
-  console.log("add final type arg --type");
+  console.log("add type arg --type");
   return;
 }
 
@@ -58,6 +61,9 @@ function processArguments() {
   args["disk"] ? (newPlot.disk = args["disk"]) : (newPlot.disk = "");
   args["notes"] ? (notes = args["notes"]) : (notes = "");
   args["type"] ? (newPlot.plot_type = args["type"]) : (newPlot.plot_type = "");
+  args["move-delayed"]
+    ? (moveDelayed = args["move-delayed"])
+    : (moveDelayed = 0);
 }
 
 // START READING LOG
@@ -74,12 +80,17 @@ tail.on("line", function (data) {
 
 // parseData("Phase 1 took 1315.98 sec");
 function parseData(d) {
+  if (d.startsWith("Final Directory:")) {
+    finalDirectory = d.split(" ").pop();
+  }
+
   if (d.startsWith("Number of Threads:")) {
     newPlot.notes = "-r " + d.split(" ").pop();
   }
 
   if (d.startsWith("Working Directory:")) {
     const path = d.split(" ").pop();
+    tempDirectory = path;
     const tmpName = tmpDrives.filter((obj) => {
       return obj.path === path;
     });
@@ -241,6 +252,10 @@ function processRate() {
     console.log("last plot rate: ", plotToSend.rate);
   }
   sendPlot(plotToSend);
+  if (moveDelayed > 0) {
+    moveToFinalDisk(plotToSend.id, moveDelayed);
+    console.log("Start delayed moving of this plot...");
+  }
 }
 
 function sendPlot(p) {
@@ -376,5 +391,29 @@ function logIt(plot, result) {
       result.success +
       " already there: " +
       result.already
+  );
+}
+
+function moveToFinalDisk(id, time) {
+  exec(
+    "sleep " +
+      time +
+      "; rsync -avP --remove-source-files " +
+      tempDirectory +
+      "*.plot " +
+      finalDirectory,
+    (err, stdout, stderr) => {
+      if (err) {
+        let log = fs.createWriteStream("logs/plots_moving_errors.log", {
+          flags: "a",
+        });
+        log.write(" could not move plot " + id + "\n");
+
+        // node couldn't execute the command
+        return;
+      }
+
+      console.log("Successfuly moved plot " + id);
+    }
   );
 }
