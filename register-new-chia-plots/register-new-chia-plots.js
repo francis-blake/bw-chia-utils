@@ -47,6 +47,10 @@ if (!args["type"]) {
   console.log("add type arg --type");
   return;
 }
+if (!args["final-path"] && args["move-delayed"]) {
+  console.log("add final path arg --final-path");
+  return;
+}
 
 // ARGUMENTS
 processArguments();
@@ -64,6 +68,9 @@ function processArguments() {
   args["move-delayed"]
     ? (moveDelayed = args["move-delayed"])
     : (moveDelayed = 0);
+  args["final-path"]
+    ? (finalDirectory = args["final-path"])
+    : (finalDirectory = "");
 }
 
 // START READING LOG
@@ -80,10 +87,6 @@ tail.on("line", function (data) {
 
 // parseData("Phase 1 took 1315.98 sec");
 function parseData(d) {
-  if (d.startsWith("Final Directory:")) {
-    finalDirectory = d.split(" ").pop();
-  }
-
   if (d.startsWith("Number of Threads:")) {
     newPlot.notes = "-r " + d.split(" ").pop();
   }
