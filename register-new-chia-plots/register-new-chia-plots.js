@@ -79,8 +79,7 @@ if (moveDelayed > 0) {
     "Finished plots will be moved with " +
       moveDelayed +
       "s delay to " +
-      finalDirectory +
-      "!"
+      finalDirectory
   );
 }
 console.log(
@@ -412,7 +411,7 @@ function moveToFinalDisk(id, time) {
       time +
       "; rsync -avP --remove-source-files " +
       tempDirectory +
-      "*.plot " +
+      "plots/*.plot " +
       finalDirectory,
     (err, stdout, stderr) => {
       if (err) {
