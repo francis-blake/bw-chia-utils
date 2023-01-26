@@ -74,6 +74,15 @@ function processArguments() {
 }
 
 // START READING LOG
+if (moveDelayed > 0) {
+  console.log(
+    "Finished plots will be moved with " +
+      moveDelayed +
+      "s delay to " +
+      finalDirectory +
+      "!"
+  );
+}
 console.log(
   "Listening to " +
     plot_log_folder +
