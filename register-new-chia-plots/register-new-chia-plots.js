@@ -142,6 +142,7 @@ function parseData(d) {
     console.log("id: ", newPlot.id);
     console.log("plot_size: ", newPlot.plot_size);
     console.log("plotted_at: ", newPlot.plotted_at);
+    updatePlottingProgress(newPlot, 0);
   }
 
   if (d.startsWith("Phase 1 took")) {
