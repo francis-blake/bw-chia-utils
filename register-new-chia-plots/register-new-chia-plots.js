@@ -26,9 +26,9 @@ let notes;
 let proofsRate;
 let plotToSend;
 let finalDirectory;
-let tempDirectory;
 let moveDelayed = 0;
 let has_progess = false;
+let stagingDirectory;
 
 setNewPlot();
 
@@ -96,13 +96,16 @@ tail.on("line", function (data) {
 
 // parseData("Phase 1 took 1315.98 sec");
 function parseData(d) {
+  if (d.startsWith("Final Directory:")) {
+    stagingDirectory = d.split(" ").pop();
+  }
+
   if (d.startsWith("Number of Threads:")) {
     newPlot.notes = "-r " + d.split(" ").pop();
   }
 
   if (d.startsWith("Working Directory:")) {
     const path = d.split(" ").pop();
-    tempDirectory = path;
     const tmpName = tmpDrives.filter((obj) => {
       return obj.path === path;
     });
@@ -278,7 +281,7 @@ function processRate() {
   }
   sendPlot(plotToSend);
   if (moveDelayed > 0) {
-    moveToFinalDisk(plotToSend.id, moveDelayed);
+    moveToFinalDisk(moveDelayed);
     console.log("Start delayed moving of this plot...");
   }
 }
@@ -419,26 +422,26 @@ function logIt(plot, result) {
   );
 }
 
-function moveToFinalDisk(id, time) {
+function moveToFinalDisk(time) {
   exec(
     "sleep " +
       time +
       "; rsync -avP --remove-source-files " +
-      tempDirectory +
-      "plots/*.plot " +
+      stagingDirectory +
+      "*.plot " +
       finalDirectory,
     (err, stdout, stderr) => {
       if (err) {
         let log = fs.createWriteStream("logs/plots_moving_errors.log", {
           flags: "a",
         });
-        log.write(" could not move plot " + id + "\n");
+        log.write(" could not move last plot\n");
 
         // node couldn't execute the command
         return;
       }
 
-      console.log("Successfuly moved plot " + id);
+      console.log("Successfuly moved plots from staging to final directory.");
     }
   );
 }
