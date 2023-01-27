@@ -28,6 +28,7 @@ let plotToSend;
 let finalDirectory;
 let tempDirectory;
 let moveDelayed = 0;
+let has_progess = false;
 
 setNewPlot();
 
@@ -144,9 +145,14 @@ function parseData(d) {
     newPlot.plot_creation_times.phase1 = parseFloat(d.split(" ")[3]);
 
     console.log("phase 1 took: ", newPlot.plot_creation_times.phase1);
+
+    if (has_progess === false) {
+      updatePlottingProgress(newPlot, 0.48);
+    }
   }
 
   if (d.startsWith("Progress update:")) {
+    has_progess = true;
     const t = d.split(" ");
     const update = t.pop();
 
@@ -157,12 +163,20 @@ function parseData(d) {
     newPlot.plot_creation_times.phase2 = parseFloat(d.split(" ")[3]);
 
     console.log("phase 2 took: ", newPlot.plot_creation_times.phase2);
+
+    if (has_progess === false) {
+      updatePlottingProgress(newPlot, 0.73);
+    }
   }
 
   if (d.startsWith("Phase 3 took")) {
     newPlot.plot_creation_times.phase3 = parseFloat(d.split(" ")[3]);
 
     console.log("phase 3 took: ", newPlot.plot_creation_times.phase3);
+
+    if (has_progess === false) {
+      updatePlottingProgress(newPlot, 0.97);
+    }
   }
 
   if (d.startsWith("Phase 4 took")) {
