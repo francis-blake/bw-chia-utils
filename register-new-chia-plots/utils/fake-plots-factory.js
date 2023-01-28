@@ -84,7 +84,71 @@ const a = [
   "Renamed final plot to /media/user/diskx/plots/plot-k32-2022-02-07-13-54-fakef6quopm1oa6bye6f7ry9l25ws3ewcbxobkhrfu4jyc3ywyt1r9ntb5fm5e9q.plot",
 ];
 
-a.forEach((element, index) => {
+const b = [
+  "Multi-threaded pipelined Chia k32 plotter - 94679d0",
+  "(Sponsored by Flexpool.io - Check them out if you're looking for a secure and scalable Chia pool)",
+  "",
+  "Network Port: 8444 [chia]",
+  "Final Directory: /media/joao/farm32/plots/",
+  "Stage Directory: /media/joao/farm12/plots/",
+  "Number of Plots: 1",
+  "Crafting plot 1 out of 1 (2023/01/25 19:23:51)",
+  "Process ID: 349756",
+  "Number of Threads: 16",
+  "Number of Buckets P1:    2^8 (256)",
+  "Number of Buckets P3+P4: 2^8 (256)",
+  "Pool Puzzle Hash:  bf39a67edeb36bb3a909c3b5c4053d3b0e29bb34d1e1a8f6ef3ca4c7de2e9d49",
+  "Farmer Public Key: 8b9a9cf3e68c9f32594dae72caf9cb9957817117fc7df73d63d9c42d5adc9b68e8175390320ebe5c948074ddeb7a1ce8",
+  "Working Directory:   /media/joao/farm12/",
+  "Working Directory 2: /mnt/ram/",
+  "Plot Name: plot-k32-2023-01-25-19-23-9ed448f617815f4dd612e8408f9ff76623378f88588338ee83f379e4e205f437",
+  "[P1] Table 1 took 13.3998 sec",
+  "[P1] Table 2 took 145.498 sec, found 4294928587 matches",
+  "[P1] Table 3 took 164.244 sec, found 4294876310 matches",
+  "[P1] Table 4 took 183.427 sec, found 4294782548 matches",
+  "[P1] Table 5 took 180.605 sec, found 4294606564 matches",
+  "[P1] Table 6 took 178.606 sec, found 4294203306 matches",
+  "[P1] Table 7 took 147.366 sec, found 4293400426 matches",
+  "Phase 1 took 1013.16 sec",
+  "[P2] max_table_size = 4294967296",
+  "[P2] Table 7 scan took 11.0229 sec",
+  "[P2] Table 7 rewrite took 33.235 sec, dropped 0 entries (0 %)",
+  "[P2] Table 6 scan took 34.8107 sec",
+  "[P2] Table 6 rewrite took 56.8959 sec, dropped 581376588 entries (13.5386 %)",
+  "[P2] Table 5 scan took 33.475 sec",
+  "[P2] Table 5 rewrite took 54.4738 sec, dropped 762045225 entries (17.7442 %)",
+  "[P2] Table 4 scan took 33.2557 sec",
+  "[P2] Table 4 rewrite took 53.9905 sec, dropped 828926725 entries (19.3008 %)",
+  "[P2] Table 3 scan took 32.9137 sec",
+  "[P2] Table 3 rewrite took 53.4577 sec, dropped 855110056 entries (19.91 %)",
+  "[P2] Table 2 scan took 35.098 sec",
+  "[P2] Table 2 rewrite took 51.8898 sec, dropped 865600216 entries (20.154 %)",
+  "Phase 2 took 508.908 sec",
+  "Wrote plot header with 252 bytes",
+  "[P3-1] Table 2 took 41.5703 sec, wrote 3429328371 right entries",
+  "[P3-2] Table 2 took 34.6571 sec, wrote 3429328371 left entries, 3429328371 final",
+  "[P3-1] Table 3 took 52.1251 sec, wrote 3439766254 right entries",
+  "[P3-2] Table 3 took 34.3316 sec, wrote 3439766254 left entries, 3439766254 final",
+  "[P3-1] Table 4 took 52.8146 sec, wrote 3465855823 right entries",
+  "[P3-2] Table 4 took 35.7023 sec, wrote 3465855823 left entries, 3465855823 final",
+  "[P3-1] Table 5 took 53.6135 sec, wrote 3532561339 right entries",
+  "[P3-2] Table 5 took 35.8234 sec, wrote 3532561339 left entries, 3532561339 final",
+  "[P3-1] Table 6 took 55.8437 sec, wrote 3712826718 right entries",
+  "[P3-2] Table 6 took 37.4017 sec, wrote 3712826718 left entries, 3712826718 final",
+  "[P3-1] Table 7 took 42.5901 sec, wrote 4293400426 right entries",
+  "[P3-2] Table 7 took 42.8954 sec, wrote 4293400426 left entries, 4293400426 final",
+  "Phase 3 took 525.317 sec, wrote 21873738931 entries to final plot",
+  "[P4] Starting to write C1 and C3 tables",
+  "[P4] Finished writing C1 and C3 tables",
+  "[P4] Writing C2 table",
+  "[P4] Finished writing C2 table",
+  "Phase 4 took 60.2377 sec, final plot size is 108814699496 bytes",
+  "Total plot creation time was 2107.7 sec (35.1284 min)",
+  "Started copy to /media/joao/farm32/plots/plot-k32-2023-01-25-19-23-9ed448f617815f4dd612e8408f9ff76623378f88588338ee83f379e4e205f437.plot",
+  "Copy to /media/joao/farm32/plots/plot-k32-2023-01-25-19-23-9ed448f617815f4dd612e8408f9ff76623378f88588338ee83f379e4e205f437.plot finished, took 312.504 sec, 332.071 MB/s avg.",
+];
+
+b.forEach((element, index) => {
   setTimeout(function () {
     // log.write(element) + "\n";
     fs.appendFile(
@@ -92,5 +156,5 @@ a.forEach((element, index) => {
       `${element}\n`,
       function () {}
     );
-  }, 30 * index);
+  }, 1000 * index);
 });
