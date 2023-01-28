@@ -156,12 +156,17 @@ function parseData(d) {
   if (d.startsWith("Progress update:")) {
     const t = d.split(" ");
     const update = t.pop();
+    has_progress = true;
 
     updatePlottingProgress(newPlot, update);
   }
 
   if (d.startsWith("Phase 2 took")) {
     newPlot.plot_creation_times.phase2 = parseFloat(d.split(" ")[3]);
+
+    if (has_progress !== true) {
+      updatePlottingProgress(newPlot, 0.73);
+    }
 
     console.log("phase 2 took: ", newPlot.plot_creation_times.phase2);
   }
