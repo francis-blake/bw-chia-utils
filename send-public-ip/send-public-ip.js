@@ -124,5 +124,5 @@ function logIt(result) {
   const ts = new Date().toISOString();
   log.write(ts);
   log.write("  >  ");
-  log.write(result.success + " updated IP.\n");
+  log.write(result + " updated IP.\n");
 }
