@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 const querystring = require("querystring");
 const os = require("os");
 const { Curl } = require("node-libcurl");
