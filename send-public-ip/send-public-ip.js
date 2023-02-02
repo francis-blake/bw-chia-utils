@@ -7,6 +7,7 @@ const { Curl } = require("node-libcurl");
 const dotenv = require("dotenv");
 dotenv.config();
 const https = require("https");
+const fs = require("fs");
 const api_host = process.env.API_HOST;
 const login_uri = process.env.API_LOGIN_URI;
 const api_info_uri = process.env.API_INFO_URI;
