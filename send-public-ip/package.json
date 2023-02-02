@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "node-libcurl": "^3.0.0",
+    "os": "^0.1.2"
+  }
+}

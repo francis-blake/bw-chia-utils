@@ -1,0 +1,15 @@
+# upload this file to /etc/systemd/system and edit to your needs adjusting your user in the path
+
+[Unit]
+Description=Run send-public-ip.sh
+
+[Service]
+Type=simple
+User=<your user>
+Group=<your group>
+WorkingDirectory=/home/<your-user>/bw-chia-utils/send-public-ip
+ExecStart=/home/<your-user>/bw-chia-utils/send-public-ip/send-public-ip.js
+
+[Install]
+WantedBy=timers.target
+WantedBy=multi-user.target
