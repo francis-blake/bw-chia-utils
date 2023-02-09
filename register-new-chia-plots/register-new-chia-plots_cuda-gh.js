@@ -197,8 +197,6 @@ function parseData(d) {
     // console.log("copy_time: ", newPlot.plot_creation_times.copy_time);
     console.log("notes: ", newPlot.notes);
 
-    old_plot = newPlot;
-    getPlotRate(newPlot);
     // console.log(newPlot);
     setNewPlot();
   }
@@ -208,6 +206,8 @@ function parseData(d) {
     let destPath = d.split(" ")[3];
     plotToSendPath = destPath;
     console.log("A: passou aqui");
+
+    getPlotRate(newPlot);
   }
 
   // OR IS COPIED TO FINAL DIRECTORY
@@ -308,8 +308,8 @@ function processRate() {
 
   setTimeout(function () {
     plotToSend.disk = getDisk(plotToSendPath, plotToSend.id);
-    sendPlot(plotToSend);
   }, 2000);
+  sendPlot(plotToSend);
 }
 
 function processSize() {
