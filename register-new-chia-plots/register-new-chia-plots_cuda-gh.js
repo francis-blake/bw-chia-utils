@@ -210,7 +210,6 @@ function parseData(d) {
   if (d.startsWith("Started copy")) {
     let destPath = d.split(" ")[3];
     plotToSendPath = destPath;
-    console.log("A: passou aqui");
 
     getPlotRate();
   }
@@ -235,7 +234,7 @@ function setNewPlot() {
 
 function getPlotRate() {
   //   plotToSend = p;
-  console.log("a > ", plotToSend.id, tempDirectory);
+  //   console.log("a > ", plotToSend.id, tempDirectory);
   exec(
     "cd " +
       home_folder +
@@ -305,8 +304,9 @@ function processRate() {
 
 function processSize() {
   if (filesize) {
-    let f_size = parseInt(filesize.split(" ")[0].replace("\n", ""));
-    plotToSend.file_size = filesize;
+    filesize = filesize.replace("\n", "").replace(" ", "");
+    let f_size = parseInt(filesize);
+    plotToSend.file_size = f_size;
     console.log("last plot size: ", plotToSend.file_size);
   }
 }
@@ -320,20 +320,20 @@ function sendPlot(p) {
   console.log(p);
 
   // start sending
-  //   let sending = setInterval(function () {
-  //     if (logged_in < 2) {
-  //       postRequest(plot_manager_uri, JSON.stringify(p)).then((d) => {
-  //         let r = JSON.parse(d);
-  //         if (r.success >= 0 || r.already >= 0) {
-  //           logIt(p, r);
-  //           clearInterval(sending);
-  //           logged_in = 0;
-  //         }
-  //       });
-  //     } else {
-  //       clearInterval(sending);
-  //     }
-  //   }, 2500);
+  let sending = setInterval(function () {
+    if (logged_in < 2) {
+      postRequest(plot_manager_uri, JSON.stringify(p)).then((d) => {
+        let r = JSON.parse(d);
+        if (r.success >= 0 || r.already >= 0) {
+          logIt(p, r);
+          clearInterval(sending);
+          logged_in = 0;
+        }
+      });
+    } else {
+      clearInterval(sending);
+    }
+  }, 2500);
 }
 
 function updatePlottingProgress(p, progress) {
