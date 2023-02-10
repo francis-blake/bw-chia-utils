@@ -229,7 +229,11 @@ function getDisk(path, id) {
     return obj.path === newpath;
   });
 
-  return destName[0].name;
+  if (destName[0].name) {
+    return destName[0].name;
+  } else {
+    return "FarmXX XXTB";
+  }
 }
 
 function setNewPlot() {
