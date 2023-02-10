@@ -242,7 +242,7 @@ function getPlotRate() {
       " > logs/retrieving_proofs.log 2>&1; ls -l " +
       tempDirectory +
       plotToSend.id +
-      ' | cut -d " " -f5 > logs/retrieving_size.log 2>&1;',
+      '.plot | cut -d " " -f5 > logs/retrieving_size.log 2>&1;',
     (err, stdout, stderr) => {
       if (err) {
         let log = fs.createWriteStream("logs/plots_resumo_errors.log", {
