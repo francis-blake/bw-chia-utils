@@ -98,6 +98,10 @@ tail.on("line", function (data) {
 
 // parseData("Phase 1 took 1315.98 sec");
 function parseData(d) {
+  if (d.startsWith("Plot Format:")) {
+    newPlot.plotter = d.split(" ").pop();
+  }
+
   if (d.startsWith("Number of Threads:")) {
     newPlot.notes = "-r " + d.split(" ").pop();
   }
