@@ -24,6 +24,7 @@ const device_name = os.hostname();
 
 let newPlot = {};
 let notes;
+let streams;
 let proofsRate;
 let filesize;
 let plotToSend;
@@ -108,6 +109,7 @@ function parseData(d) {
 
   if (d.startsWith("No. Streams")) {
     newPlot.notes = "-S " + d.split(" ").pop();
+    streams = d.split(" ").pop();
   }
 
   if (d.startsWith("Working Directory:")) {
@@ -196,7 +198,11 @@ function parseData(d) {
     console.log("total_time: ", newPlot.plot_creation_times.total_time);
 
     // newPlot.plot_creation_times.copy_time = 0;
-    newPlot.notes += " " + notes;
+    if (notes) {
+      newPlot.notes += " " + notes;
+    } else {
+      newPlot.notes = "-S " + streams;
+    }
 
     // console.log("copy_time: ", newPlot.plot_creation_times.copy_time);
     console.log("notes: ", newPlot.notes);
