@@ -231,7 +231,7 @@ function setNewPlot() {
 
 function getPlotRate() {
   //   plotToSend = p;
-  console.log("a > ", plotToSend.id);
+  console.log("a > ", plotToSend.id, tempDirectory);
   exec(
     "cd " +
       home_folder +
