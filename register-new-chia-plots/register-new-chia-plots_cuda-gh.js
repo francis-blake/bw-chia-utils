@@ -102,9 +102,9 @@ function parseData(d) {
     newPlot.plotter = d.split(" ").pop();
   }
 
-  if (d.startsWith("Number of Threads:")) {
-    newPlot.notes = "-r " + d.split(" ").pop();
-  }
+  //   if (d.startsWith("Number of Threads:")) {
+  //     newPlot.notes = "-r " + d.split(" ").pop();
+  //   }
 
   if (d.startsWith("No. Streams")) {
     newPlot.notes = "-S " + d.split(" ").pop();
