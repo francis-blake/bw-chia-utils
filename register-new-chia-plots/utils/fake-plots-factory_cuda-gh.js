@@ -68,7 +68,7 @@ const a = [
   "[P1] Table 2 took 8.222 sec, 4294789104 entries, 16789120 max, 66717 tmp, 3.892 GB/s up, 6.2029 GB/s down",
   "[P1] Table 3 took 10.038 sec, 4294411247 entries, 16785048 max, 66677 tmp, 4.78163 GB/s up, 8.46785 GB/s down",
   "Flushing to disk took 32.599 sec",
-  "Started copy to /media/joao/farm34/plot-k32-c7-2023-02-09-15-47-e063cce64d2d2265fb79fe40a0cad2c0356167bf070dc68cf5f01da167a59d5a.plot",
+  "Started copy to /media/joao/farm34/plots/plot-k32-c7-2023-02-09-15-47-e063cce64d2d2265fb79fe40a0cad2c0356167bf070dc68cf5f01da167a59d5a.plot",
   "[P1] Table 4 took 15.102 sec, 4293742549 entries, 16789159 max, 66645 tmp, 5.29663 GB/s up, 8.16119 GB/s down",
   "[P1] Table 5 took 13.245 sec, 4292476981 entries, 16778994 max, 66649 tmp, 6.03829 GB/s up, 7.70104 GB/s down",
   "[P1] Table 6 took 11.341 sec, 4289890519 entries, 16770964 max, 66789 tmp, 5.63997 GB/s up, 7.49495 GB/s down",
@@ -99,7 +99,7 @@ const a = [
   "Phase 4 took 4.607 sec, 6.92946 GB/s up, 3.96862 GB/s down",
   "Total plot creation time was 159.556 sec (2.65926 min)",
   "Flushing to disk took 24.351 sec",
-  "Started copy to /media/joao/farm35/plot-k32-c7-2023-02-09-15-51-67cd27698889c5e077da96c6767373ed0f6b45bdd165eebb8ad80e376a655e22.plot",
+  "Started copy to /media/joao/farm35/plots/plot-k32-c7-2023-02-09-15-51-67cd27698889c5e077da96c6767373ed0f6b45bdd165eebb8ad80e376a655e22.plot",
   "Copy to /media/joao/farm34/plot-k32-c7-2023-02-09-15-47-e063cce64d2d2265fb79fe40a0cad2c0356167bf070dc68cf5f01da167a59d5a.plot finished, took 397.439 sec, 192.208 MB/s",
   "Copy to /media/joao/farm35/plot-k32-c7-2023-02-09-15-51-67cd27698889c5e077da96c6767373ed0f6b45bdd165eebb8ad80e376a655e22.plot finished, took 300.497 sec, 254.022 MB/s",
 ];
@@ -112,5 +112,5 @@ a.forEach((element, index) => {
       `${element}\n`,
       function () {}
     );
-  }, 100 * index);
+  }, 300 * index);
 });

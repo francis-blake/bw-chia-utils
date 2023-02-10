@@ -56,9 +56,9 @@ if (!args["final-path"] && args["move-delayed"]) {
 }
 
 // ARGUMENTS
-processArguments(plotToSend);
+processArguments();
 
-function processArguments(op) {
+function processArguments() {
   device_name
     ? (newPlot.plot_creation_times.machine = device_name)
     : (newPlot.plot_creation_times.machine = "");
@@ -197,6 +197,7 @@ function parseData(d) {
     // console.log("copy_time: ", newPlot.plot_creation_times.copy_time);
     console.log("notes: ", newPlot.notes);
 
+    plotToSend = newPlot;
     // console.log(newPlot);
     setNewPlot();
   }
@@ -207,29 +208,16 @@ function parseData(d) {
     plotToSendPath = destPath;
     console.log("A: passou aqui");
 
-    getPlotRate(newPlot);
+    getPlotRate();
   }
-
-  // OR IS COPIED TO FINAL DIRECTORY
-  //   if (d.startsWith("Copy to")) {
-  //     let t = d.split(" ");
-  //     newPlot.plot_creation_times.copy_time = parseInt(t[5]);
-  //     newPlot.notes += " " + notes;
-
-  //     console.log("copy_time: ", newPlot.plot_creation_times.copy_time);
-  //     console.log("notes: ", newPlot.notes);
-
-  //     getPlotRate(newPlot);
-  //     // console.log(newPlot);
-  //     setNewPlot();
-  //   }
 }
 
 function getDisk(path, id) {
-  console.log("B: ", plotToSendPath, path, id);
-  path = path.replace(id + ".plot", "");
+  console.log("B: ", path, "plots/" + id);
+  let newpath = path.replace("plots/" + id + ".plot", "");
+  console.log("new: " + newpath);
   const destName = tmpDrives.filter((obj) => {
-    return obj.path === path;
+    return obj.path === newpath;
   });
 
   return destName[0].name;
@@ -241,8 +229,8 @@ function setNewPlot() {
   processArguments();
 }
 
-function getPlotRate(p) {
-  plotToSend = p;
+function getPlotRate() {
+  //   plotToSend = p;
   console.log("a > ", plotToSend.id);
   exec(
     "cd " +
@@ -250,18 +238,18 @@ function getPlotRate(p) {
       "/bw-chia-utils/register-new-chia-plots; " +
       chia_bin +
       " plots check -g " +
-      p.id +
-      " > logs/retrieving_proofs_lixo.log 2>&1; ls -l " +
+      plotToSend.id +
+      " > logs/retrieving_proofs.log 2>&1; ls -l " +
       tempDirectory +
-      p.id +
+      plotToSend.id +
       ' | cut -d " " -f5 > logs/retrieving_size.log 2>&1;',
     (err, stdout, stderr) => {
       if (err) {
         let log = fs.createWriteStream("logs/plots_resumo_errors.log", {
           flags: "a",
         });
-        log.write(" could not get proofs of " + p.id + "\n");
-        sendPlot(p);
+        log.write(" could not get proofs of " + plotToSend.id + "\n");
+        sendPlot(plotToSend);
         // node couldn't execute the command
         return;
       }
@@ -306,9 +294,8 @@ function processRate() {
     console.log("last plot rate: ", plotToSend.rate);
   }
 
-  setTimeout(function () {
-    plotToSend.disk = getDisk(plotToSendPath, plotToSend.id);
-  }, 2000);
+  plotToSend.disk = getDisk(plotToSendPath, plotToSend.id);
+  console.log("aqui");
   sendPlot(plotToSend);
 }
 
