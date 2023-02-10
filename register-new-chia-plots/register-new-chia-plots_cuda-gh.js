@@ -305,7 +305,7 @@ function processRate() {
 
 function processSize() {
   if (filesize) {
-    let f_size = parseInt(filesize.split(" ")[0]);
+    let f_size = parseInt(filesize.split(" ")[0].replace("\n", ""));
     plotToSend.file_size = filesize;
     console.log("last plot size: ", plotToSend.file_size);
   }
