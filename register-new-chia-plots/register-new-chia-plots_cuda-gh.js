@@ -27,6 +27,7 @@ let notes;
 let streams;
 let proofsRate;
 let filesize;
+let plotterVersion;
 let plotToSend;
 let plotToSendPath;
 let finalDirectory;
@@ -100,7 +101,7 @@ tail.on("line", function (data) {
 // parseData("Phase 1 took 1315.98 sec");
 function parseData(d) {
   if (d.startsWith("Plot Format:")) {
-    newPlot.plotter = d.split(" ").pop();
+    newPlot.plotter = plotterVersion = d.split(" ").pop();
   }
 
   //   if (d.startsWith("Number of Threads:")) {
@@ -148,6 +149,14 @@ function parseData(d) {
       ":" +
       pid_arr[7];
     newPlot.plot_compression = pid_arr[2];
+
+    if (plotterVersion) {
+      newPlot.plotter = plotterVersion;
+    }
+
+    if (streams) {
+      newPlot.notes = "-S " + streams;
+    }
 
     updatePlottingProgress(newPlot, 0);
 
@@ -354,7 +363,6 @@ function sendPlot(p) {
 
 function updatePlottingProgress(p, progress) {
   // clears
-  p.disk = "N/A";
   p.plotting_progress = progress;
   proofsRate = "";
 
