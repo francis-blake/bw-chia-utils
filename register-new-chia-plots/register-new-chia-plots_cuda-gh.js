@@ -354,6 +354,7 @@ function sendPlot(p) {
 
 function updatePlottingProgress(p, progress) {
   // clears
+  p.disk = "N/A";
   p.plotting_progress = progress;
   proofsRate = "";
 
