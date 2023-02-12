@@ -158,7 +158,7 @@ function parseData(d) {
       newPlot.notes = "-S " + streams;
     }
 
-    updatePlottingProgress(newPlot, 0);
+    updatePlottingProgress(newPlot, 0.01);
 
     console.log("id: ", newPlot.id);
     console.log("plot_size: ", newPlot.plot_size);
@@ -184,6 +184,8 @@ function parseData(d) {
   if (d.startsWith("Phase 2 took")) {
     newPlot.plot_creation_times.phase2 = parseFloat(d.split(" ")[3]);
 
+    updatePlottingProgress(newPlot, 0.48);
+
     console.log("phase 2 took: ", newPlot.plot_creation_times.phase2);
   }
 
@@ -199,6 +201,8 @@ function parseData(d) {
     let t = d.split(" ");
     newPlot.plot_creation_times.phase4 = parseFloat(t[3]);
     newPlot.file_size = parseInt(t[9]);
+
+    updatePlottingProgress(newPlot, 1);
 
     console.log("phase 4 took: ", newPlot.plot_creation_times.phase4);
     console.log("file_size: ", newPlot.file_size);
