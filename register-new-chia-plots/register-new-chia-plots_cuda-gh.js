@@ -149,6 +149,8 @@ function parseData(d) {
       pid_arr[7];
     newPlot.plot_compression = pid_arr[2];
 
+    updatePlottingProgress(newPlot, 0);
+
     console.log("id: ", newPlot.id);
     console.log("plot_size: ", newPlot.plot_size);
     console.log("compression: ", newPlot.plot_compression);
@@ -157,6 +159,8 @@ function parseData(d) {
 
   if (d.startsWith("Phase 1 took")) {
     newPlot.plot_creation_times.phase1 = parseFloat(d.split(" ")[3]);
+
+    updatePlottingProgress(newPlot, 0.46);
 
     console.log("phase 1 took: ", newPlot.plot_creation_times.phase1);
   }
@@ -176,6 +180,8 @@ function parseData(d) {
 
   if (d.startsWith("Phase 3 took")) {
     newPlot.plot_creation_times.phase3 = parseFloat(d.split(" ")[3]);
+
+    updatePlottingProgress(newPlot, 0.97);
 
     console.log("phase 3 took: ", newPlot.plot_creation_times.phase3);
   }
