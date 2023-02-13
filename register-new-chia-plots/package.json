@@ -4,6 +4,7 @@
   "description": "script to automatically register in a database your plots while they are being created",
   "dependencies": {
     "dotenv": "^15.0.0",
+    "fs": "^0.0.1-security",
     "minimist": "^1.2.5",
     "qfgets": "^1.1.1",
     "systeminformation": "^5.11.16",
