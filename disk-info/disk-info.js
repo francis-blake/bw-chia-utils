@@ -75,13 +75,13 @@ function getDiskSmartData(filename, regexp, done) {
 
 function processLine(line, regexp) {
   if (line && line.match(regexp)) {
-    exec("df -h " + line, (err, stdout, stderr) => {
+    exec("df -h " + line, async (err, stdout, stderr) => {
       if (stdout) {
         let devLine = stdout.split("\n")[1];
         let parts = devLine.split(" ");
         let label = parts.pop().split("/").pop();
         if (!label) label = "system";
-        let data = getDeviceData(parts[0], label);
+        let data = await getDeviceData(parts[0], label);
       }
     });
   }
@@ -95,11 +95,11 @@ function grepFoldersWithFs(filename, regexp, done) {
       // if (line && line.match(regexp)) folder = line;
       if (line && line.match(regexp)) {
         // folders.push(line);
-        exec("df -h " + line, (err, stdout, stderr) => {
+        exec("df -h " + line, async (err, stdout, stderr) => {
           if (stdout) {
             let devLine = stdout.split("\n")[1];
             let parts = devLine.split(" ");
-            let data = getDeviceData(parts[0]);
+            let data = await getDeviceData(parts[0]);
           }
           if (err) {
             let log = fs.createWriteStream("logs/check_devices_errors.log", {
@@ -122,7 +122,7 @@ function processDevices() {
   // nao apagar
 }
 
-function getDeviceData(d, m) {
+async function getDeviceData(d, m) {
   let p = d.split("/");
   let disk;
   let device;
@@ -151,9 +151,9 @@ function getDeviceData(d, m) {
           all_info: jsonData,
         };
 
-        // if (jsonData.device.protocol === "SCSI") {
-        //   device = getSCSIdata(disk, device);
-        // }
+        if (jsonData.device.protocol === "SCSI") {
+          device = await getSCSIdata(disk, device);
+        }
 
         devices.push(device);
         // console.log(device);
@@ -182,7 +182,7 @@ function IsJsonString(str) {
   }
 }
 
-function getSCSIdata(disk, dev) {
+async function getSCSIdata(disk, dev) {
   if (fs.existsSync(disk_data_folder + "/" + disk + ".txt")) {
     return processLineByLine(dev, disk_data_folder + "/" + disk + ".txt");
   } else {
