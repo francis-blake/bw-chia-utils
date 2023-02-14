@@ -151,9 +151,9 @@ function getDeviceData(d, m) {
           all_info: jsonData,
         };
 
-        if (jsonData.device.protocol === "SCSI") {
-          device = getSCSIdata(disk, device);
-        }
+        // if (jsonData.device.protocol === "SCSI") {
+        //   device = getSCSIdata(disk, device);
+        // }
 
         devices.push(device);
         // console.log(device);
