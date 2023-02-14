@@ -7,7 +7,7 @@ if [ ! -d $DIR/dev ]; then
 fi
 
 truncate -s 0 "$DIR/mounted_disks.log"
-smartctl --scan | awk '{print $1}' >> "$DIR/mounted_disks.log"
+smartctl --scan-open | awk '{print $1 " " $3}' >> "$DIR/mounted_disks.log"
 
 getArray ()
 {
@@ -25,9 +25,17 @@ getArray "$DIR/mounted_disks.log"
 for e in "${array[@]}"
 do
     if [[ $e =~ /dev/sd* || $e =~ /dev/nvme* ]]
-        then
-            # echo "smartctl -i -A --json $e" >> "$DIR$e".json
-            truncate -s 0 "$DIR$e".json
-            smartctl -iA -l devstat --json $e >> "$DIR$e".json # Run smartctl into all disks that the host have
+         then
+            arr=($e)
+            if [[ ${arr[1]} == sat || ${arr[1]} == nvme ]]; then
+                    truncate -s 0 $DIR${arr[0]}.json
+                    smartctl -iA -l devstat --json ${arr[0]} >> $DIR${arr[0]}.json # Run smartctl into all disks that the host have
+            fi
+
+            if [[ ${arr[1]} == scsi ]]; then
+                    truncate -s 0 $DIR${arr[0]}.json
+                    smartctl -a --json ${arr[0]} >> $DIR${arr[0]}.json # Run smartctl into all disks that the host have
+                    smartctl -a ${arr[0]} >> $DIR${arr[0]}.txt
+            fi
     fi
 done
