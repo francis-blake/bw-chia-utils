@@ -7,6 +7,7 @@ dotenv.config();
 const qfgets = require("qfgets");
 const https = require("https");
 const fs = require("fs");
+const readline = require("readline");
 const { exec } = require("child_process");
 const api_host = process.env.API_HOST;
 const login_uri = process.env.API_LOGIN_URI;
@@ -126,7 +127,7 @@ function getDeviceData(d, m) {
   let disk;
   let device;
   if (p[2].startsWith("sd")) {
-    disk = p[2].substring(0, p[2].length-1);
+    disk = p[2].substring(0, p[2].length - 1);
   } else if (p[2].startsWith("nvme")) {
     disk = p[2].substring(0, 5);
   }
@@ -149,6 +150,10 @@ function getDeviceData(d, m) {
           model_family: jsonData.model_family,
           all_info: jsonData,
         };
+
+        if (jsonData.device.protocol === "scsi") {
+          device = getSCSIdata(disk, device);
+        }
 
         devices.push(device);
         // console.log(device);
@@ -175,6 +180,53 @@ function IsJsonString(str) {
   } catch (e) {
     return false;
   }
+}
+
+function getSCSIdata(disk, dev) {
+  if (fs.existsSync(disk_data_folder + "/" + disk + ".txt")) {
+    return processLineByLine(dev, disk_data_folder + "/" + disk + ".txt");
+  } else {
+    return dev;
+  }
+}
+
+async function processLineByLine(d, f) {
+  const fileStream = fs.createReadStream(f);
+
+  const rl = readline.createInterface({
+    input: fileStream,
+    crlfDelay: Infinity,
+  });
+  // Note: we use the crlfDelay option to recognize all instances of CR LF
+  // ('\r\n') in input.txt as a single line break.
+
+  for await (const line of rl) {
+    // Each line in input.txt will be successively available here as `line`.
+    if (line.startsWith("Accumulated start-stop")) {
+      d.power_cycle_count = parseInt(line.split(" ").pop());
+    }
+    if (line.startsWith("Accumulated load-unload")) {
+      d.head_load_events = parseInt(line.split(" ").pop());
+    }
+    if (line.startsWith("Elements in grown defect list")) {
+      d.reallocated_sectors = parseInt(line.split(" ").pop());
+    }
+    if (line.startsWith("Logical block size:")) {
+      d.logical_block_size = parseInt(line.split(" ")[5]);
+    }
+    if (line.startsWith("read:")) {
+      d.bytes_read = parseInt(
+        line.replace(/\s\s+/g, " ").split(" ")[6] * 1000 * 1000 * 1000
+      );
+    }
+    if (line.startsWith("write:")) {
+      d.bytes_written = parseInt(
+        line.replace(/\s\s+/g, " ").split(" ")[6] * 1000 * 1000 * 1000
+      );
+    }
+  }
+
+  return d;
 }
 
 function sendInfo(b) {
