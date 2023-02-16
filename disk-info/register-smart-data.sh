@@ -39,3 +39,29 @@ do
             fi
     fi
 done
+
+
+i=0
+while read line
+do
+    array[ $i ]="$line"
+    (( i++ ))
+done < <(df)
+
+i=0
+JSONARR="["
+for e in "${array[@]}"
+do
+    if [[ $i>0 ]]; then
+        JSONARR+=","
+    fi
+    arr=($e)
+    arr2=${arr[5]##*/}
+    LABEL=${arr2[${#arr2[@]}-1]}
+    JSONARR+='{"label":"'$LABEL'","pct":"'${arr[4]}'"}'
+    i=i+1
+done
+JSONARR+="]"
+
+DIR="$(pwd)/logs/disk-data";
+echo $JSONARR | tee $DIR/df.json
