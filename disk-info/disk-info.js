@@ -26,6 +26,12 @@ let folders = [];
 let devices = [];
 let total_devices = 0;
 let processed_devices = 0;
+let df_json = {};
+
+if (fs.existsSync(disk_data_folder + "/../df.json")) {
+  df_json = require(disk_data_folder + "/../df.json");
+  console.log(1, df_json);
+}
 
 check_plots_folders();
 
@@ -136,6 +142,7 @@ async function getDeviceData(d, m) {
     if (fs.existsSync(disk_data_folder + "/" + disk + ".json")) {
       let jsonData = require(disk_data_folder + "/" + disk + ".json");
 
+      let dfInfo = df_json.find((item) => item.label === m);
       if (IsJsonString(jsonData)) {
         device = {
           harvester: os.hostname(),
@@ -148,6 +155,7 @@ async function getDeviceData(d, m) {
           rotation_rate: jsonData.rotation_rate,
           user_capacity: jsonData.user_capacity.bytes,
           model_family: jsonData.model_family,
+          pct_used: parseFloat(dfInfo.pct.replace("%", "")) / 100,
           all_info: jsonData,
         };
 
