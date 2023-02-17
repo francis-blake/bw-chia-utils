@@ -142,7 +142,13 @@ async function getDeviceData(d, m) {
     if (fs.existsSync(disk_data_folder + "/" + disk + ".json")) {
       let jsonData = require(disk_data_folder + "/" + disk + ".json");
 
-      let dfInfo = df_json.find((item) => item.label === m);
+      let sl;
+      if (m == "system") {
+        sl = "";
+      } else {
+        sl = m;
+      }
+      let dfInfo = df_json.find((item) => item.label === sl);
       if (IsJsonString(jsonData)) {
         device = {
           harvester: os.hostname(),
