@@ -30,7 +30,6 @@ let df_json = {};
 
 if (fs.existsSync(disk_data_folder + "/../df.json")) {
   df_json = require(disk_data_folder + "/../df.json");
-  console.log(1, df_json);
 }
 
 check_plots_folders();
