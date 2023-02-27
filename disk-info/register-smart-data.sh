@@ -34,6 +34,7 @@ do
 
             if [[ ${arr[1]} == scsi ]]; then
                     truncate -s 0 $DIR${arr[0]}.json
+                    truncate -s 0 $DIR${arr[0]}.txt
                     smartctl -a --json ${arr[0]} >> $DIR${arr[0]}.json # Run smartctl into all disks that the host have
                     smartctl -a ${arr[0]} >> $DIR${arr[0]}.txt
             fi
