@@ -183,7 +183,7 @@ async function getDeviceData(d, m) {
   //   console.log(d, m, processed_devices, total_devices);
   if (processed_devices === total_devices) {
     // let body = JSON.stringify(devices);
-    splitData(body);
+    splitData(devices);
   }
 }
 
