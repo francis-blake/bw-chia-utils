@@ -182,7 +182,40 @@ async function getDeviceData(d, m) {
 
   //   console.log(d, m, processed_devices, total_devices);
   if (processed_devices === total_devices) {
-    let body = JSON.stringify(devices);
+    // let body = JSON.stringify(devices);
+    splitData(body);
+  }
+}
+
+let partialControl = 0;
+let partialDevices = [];
+let totalPartials = 0;
+function splitData(d) {
+  let i = 0;
+  let localControl = 0;
+  d.forEach((dev) => {
+    if (!partialDevices[localControl]) {
+      totalPartials++;
+      partialDevices[localControl] = [];
+    }
+    partialDevices[localControl].push(dev);
+    i++;
+
+    if (i == 10) {
+      localControl++;
+      i = 0;
+    }
+  });
+
+  let body = JSON.stringify(partialDevices[partialControl]);
+  sendInfo(body);
+}
+
+function processNextPartial() {
+  partialControl++;
+
+  if (partialControl < totalPartials) {
+    let body = JSON.stringify(partialDevices[partialControl]);
     sendInfo(body);
   }
 }
@@ -327,4 +360,6 @@ function logIt(result) {
   log.write(ts);
   log.write("  >  ");
   log.write(result.success + " updated devices\n");
+
+  processNextPartial();
 }
