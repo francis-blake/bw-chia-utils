@@ -30,7 +30,7 @@ let processed = 0;
 sendAllPlots();
 
 async function sendAllPlots() {
-  for (const pl of plotList) {
+  for (const pl of [...plotList]) {
     let rate = await getPlotRate(pl);
     let newP = {
       id: pl,
