@@ -37,7 +37,6 @@ async function sendAllPlots() {
       rate: rate,
     };
     processPlot(newP);
-    return;
   }
 }
 
