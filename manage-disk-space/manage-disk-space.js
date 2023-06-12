@@ -18,6 +18,7 @@ const device_name = os.hostname();
 
 let disks = [];
 let pattern = "";
+let minSize = 0;
 
 // Mandatoy ARGS
 if (!args["disks"]) {
@@ -30,6 +31,11 @@ if (!args["pattern"]) {
   return;
 }
 
+if (!args["min-size"]) {
+  console.log("add min-size arg --min-size");
+  return;
+}
+
 // ARGUMENTS
 processArguments();
 
@@ -39,13 +45,15 @@ function processArguments() {
   args["pattern"]
     ? (pattern = args["pattern"].replace("#", "*"))
     : (pattern = "");
+
+  args["min-size"] ? (minSize = args["min-size"]) : (minSize = 0);
 }
 
 analysePlots();
 
 setInterval(function () {
   analysePlots();
-}, 20000);
+}, 45000);
 
 function analysePlots() {
   disks.forEach((d) => {
@@ -66,8 +74,8 @@ async function processDisk(d) {
       if (freeSpace < 85448207360) {
         let pathOfFileToRemove = allFiles[0];
         try {
-          //   fs.unlinkSync(pathOfFileToRemove);
-          fs.unlinkSync("/media/joao/" + d + "/abc.tmp");
+          fs.unlinkSync(pathOfFileToRemove);
+          //   fs.unlinkSync("/media/joao/" + d + "/abc.tmp"); // for testing purposes
           console.error("Removed file " + pathOfFileToRemove);
         } catch (err) {
           console.error(err);
@@ -104,7 +112,7 @@ function removeFromServer(plot) {
         let r = JSON.parse(d);
         if (r.success >= 0 || r.already >= 0) {
           // logIt(l.length, r);
-          console.log("Deleted plot " + plot.id + " in Chia Plot Manager");
+          console.log("Deleted " + plot.id + " in Plot Manager");
           clearInterval(sending);
           logged_in = 0;
         }
