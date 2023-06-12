@@ -3,6 +3,8 @@ const args = require("minimist")(process.argv.slice(2));
 const fs = require("fs");
 const dotenv = require("dotenv");
 var dateTime = require("node-datetime");
+const os = require("os");
+const https = require("https");
 dotenv.config();
 const api_host = process.env.API_HOST;
 const login_uri = process.env.API_LOGIN_URI;
@@ -12,6 +14,7 @@ let logged_in = 0;
 const api_user = process.env.API_USER;
 const api_password = process.env.API_PASSWORD;
 const api_port = process.env.API_PORT;
+const device_name = os.hostname();
 
 let disks = [];
 let pattern = "";
@@ -64,7 +67,7 @@ async function processDisk(d) {
         let pathOfFileToRemove = allFiles[0];
         try {
           //   fs.unlinkSync(pathOfFileToRemove);
-          fs.unlinkSync("/media/joao/" + d + "/abc.txt");
+          fs.unlinkSync("/media/joao/" + d + "/abc.tmp");
           console.error("Removed file " + pathOfFileToRemove);
         } catch (err) {
           console.error(err);
