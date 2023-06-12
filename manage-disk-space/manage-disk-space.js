@@ -71,7 +71,7 @@ async function processDisk(d) {
     require("child_process").exec("df /media/joao/" + d, function (err, resp) {
       freeSpace = resp.split(" ")[28] * 1024;
 
-      if (freeSpace < 85448207360) {
+      if (freeSpace < minSize) {
         let pathOfFileToRemove = allFiles[0];
         try {
           fs.unlinkSync(pathOfFileToRemove);
