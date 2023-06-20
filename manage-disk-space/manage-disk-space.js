@@ -72,21 +72,25 @@ async function processDisk(d) {
       freeSpace = resp.split(" ")[28] * 1024;
 
       if (freeSpace < minSize) {
-        let pathOfFileToRemove = allFiles[0];
-        try {
-          fs.unlinkSync(pathOfFileToRemove);
-          //   fs.unlinkSync("/media/joao/" + d + "/abc.tmp"); // for testing purposes
-          console.error("Removed file " + pathOfFileToRemove);
-        } catch (err) {
-          console.error(err);
+        if (allFiles.length > 0) {
+          let pathOfFileToRemove = allFiles[0];
+          try {
+            fs.unlinkSync(pathOfFileToRemove);
+            //   fs.unlinkSync("/media/joao/" + d + "/abc.tmp"); // for testing purposes
+            console.error("Removed file " + pathOfFileToRemove);
+          } catch (err) {
+            console.error(err);
+          }
+
+          id = pathOfFileToRemove.split("/").pop().split(".")[0];
+          // console.log(pathOfFileToRemove, id);
+
+          var dt = dateTime.create();
+          var deleted_date = dt.format("Y-m-d");
+          removeFromServer({ id: id, deleted_date: deleted_date });
+        } else {
+          console.log("no more files with give pattern [" + pattern + "] in disk " + d);
         }
-
-        id = pathOfFileToRemove.split("/").pop().split(".")[0];
-        // console.log(pathOfFileToRemove, id);
-
-        var dt = dateTime.create();
-        var deleted_date = dt.format("Y-m-d");
-        removeFromServer({ id: id, deleted_date: deleted_date });
       }
     });
   }
