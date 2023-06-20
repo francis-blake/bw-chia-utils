@@ -90,6 +90,8 @@ async function processDisk(d) {
           removeFromServer({ id: id, deleted_date: deleted_date });
         } else {
           console.log("no more files with give pattern [" + pattern + "] in disk " + d);
+          const disk_index = disks.indexOf(d);
+          disks.splice(disk_index, 1);
         }
       }
     });
