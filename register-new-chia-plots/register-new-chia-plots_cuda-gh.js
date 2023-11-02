@@ -78,8 +78,8 @@ function processArguments() {
     ? (finalDirectory = args["final-path"])
     : (finalDirectory = "");
   args["faking"]
-    ? (finalDirectory = args["faking"])
-    : (finalDirectory = 0);
+    ? (faking = args["faking"])
+    : (faking = 0);
 }
 
 // START READING LOG
@@ -96,6 +96,9 @@ console.log(
   plot_log_folder +
   "/plots.log and waiting for plotter to start logging..."
 );
+if (faking == 1) {
+  console.log("[Faking]");
+}
 tail = new Tail(plot_log_folder + "/plots.log");
 
 tail.on("line", function (data) {
