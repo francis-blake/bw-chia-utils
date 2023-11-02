@@ -32,9 +32,9 @@ async function processLineByLine() {
   for await (const line of rl) {
     // Each line in input.txt will be successively available here as `line`.
     // log.write(element) + "\n";
-    fs.appendFile(plot_log_folder + "/plots.log", `${line}\n`, function () {});
+    fs.appendFile(plot_log_folder + "/plots.log", `${line}\n`, function () { });
     // console.log(`Line from file: ${line}`);
-    await sleep(2000);
+    await sleep(800);
   }
 }
 

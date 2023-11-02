@@ -33,6 +33,7 @@ let plotToSendPath;
 let finalDirectory;
 let tempDirectory;
 let moveDelayed = 0;
+let faking = 0;
 
 setNewPlot();
 
@@ -76,21 +77,24 @@ function processArguments() {
   args["final-path"]
     ? (finalDirectory = args["final-path"])
     : (finalDirectory = "");
+  args["faking"]
+    ? (finalDirectory = args["faking"])
+    : (finalDirectory = 0);
 }
 
 // START READING LOG
 if (moveDelayed > 0) {
   console.log(
     "Finished plots will be moved with " +
-      moveDelayed +
-      "s delay to " +
-      finalDirectory
+    moveDelayed +
+    "s delay to " +
+    finalDirectory
   );
 }
 console.log(
   "Listening to " +
-    plot_log_folder +
-    "/plots.log and waiting for plotter to start logging..."
+  plot_log_folder +
+  "/plots.log and waiting for plotter to start logging..."
 );
 tail = new Tail(plot_log_folder + "/plots.log");
 
@@ -236,7 +240,12 @@ function parseData(d) {
     let destPath = d.split(" ")[3];
     plotToSendPath = destPath;
 
-    getPlotRate();
+    if (faking == 0) {
+      getPlotRate();
+    } else if (faking = 1) {
+      plotToSend.disk = getDisk(plotToSendPath, plotToSend.id);
+      sendPlot(plotToSend);
+    }
   }
 }
 
@@ -266,15 +275,15 @@ function getPlotRate() {
   //   console.log("a > ", plotToSend.id, tempDirectory);
   exec(
     "cd " +
-      home_folder +
-      "/bw-chia-utils/register-new-chia-plots; " +
-      chia_bin +
-      " plots check -g " +
-      plotToSend.id +
-      " > logs/retrieving_proofs.log 2>&1; ls -l " +
-      tempDirectory +
-      plotToSend.id +
-      '.plot | cut -d " " -f5 > logs/retrieving_size.log 2>&1;',
+    home_folder +
+    "/bw-chia-utils/register-new-chia-plots; " +
+    chia_bin +
+    " plots check -g " +
+    plotToSend.id +
+    " > logs/retrieving_proofs.log 2>&1; ls -l " +
+    tempDirectory +
+    plotToSend.id +
+    '.plot | cut -d " " -f5 > logs/retrieving_size.log 2>&1;',
     (err, stdout, stderr) => {
       if (err) {
         let log = fs.createWriteStream("logs/plots_resumo_errors.log", {
@@ -461,32 +470,32 @@ function logIt(plot, result) {
   log2.write(" > ");
   log2.write(
     result.success +
-      " plot successfully added / " +
-      result.already +
-      " plot already exists" +
-      " - " +
-      plot.id +
-      "\n"
+    " plot successfully added / " +
+    result.already +
+    " plot already exists" +
+    " - " +
+    plot.id +
+    "\n"
   );
 
   console.log(
     "DB insert " +
-      plot.id +
-      " >> success: " +
-      result.success +
-      " already there: " +
-      result.already
+    plot.id +
+    " >> success: " +
+    result.success +
+    " already there: " +
+    result.already
   );
 }
 
 function moveToFinalDisk(id, time) {
   exec(
     "sleep " +
-      time +
-      "; rsync -avP --remove-source-files " +
-      tempDirectory +
-      "plots/*.plot " +
-      finalDirectory,
+    time +
+    "; rsync -avP --remove-source-files " +
+    tempDirectory +
+    "plots/*.plot " +
+    finalDirectory,
     (err, stdout, stderr) => {
       if (err) {
         let log = fs.createWriteStream("logs/plots_moving_errors.log", {
