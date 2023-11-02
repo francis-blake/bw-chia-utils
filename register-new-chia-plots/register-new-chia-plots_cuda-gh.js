@@ -173,7 +173,9 @@ function parseData(d) {
   if (d.startsWith("Phase 1 took")) {
     newPlot.plot_creation_times.phase1 = parseFloat(d.split(" ")[3]);
 
-    updatePlottingProgress(newPlot, 0.46);
+    if (faking == 0) {
+      updatePlottingProgress(newPlot, 0.46);
+    }
 
     console.log("phase 1 took: ", newPlot.plot_creation_times.phase1);
   }
@@ -188,7 +190,9 @@ function parseData(d) {
   if (d.startsWith("Phase 2 took")) {
     newPlot.plot_creation_times.phase2 = parseFloat(d.split(" ")[3]);
 
-    updatePlottingProgress(newPlot, 0.48);
+    if (faking == 0) {
+      updatePlottingProgress(newPlot, 0.48);
+    }
 
     console.log("phase 2 took: ", newPlot.plot_creation_times.phase2);
   }
@@ -196,7 +200,9 @@ function parseData(d) {
   if (d.startsWith("Phase 3 took")) {
     newPlot.plot_creation_times.phase3 = parseFloat(d.split(" ")[3]);
 
-    updatePlottingProgress(newPlot, 0.97);
+    if (faking == 0) {
+      updatePlottingProgress(newPlot, 0.97);
+    }
 
     console.log("phase 3 took: ", newPlot.plot_creation_times.phase3);
   }
@@ -206,7 +212,9 @@ function parseData(d) {
     newPlot.plot_creation_times.phase4 = parseFloat(t[3]);
     newPlot.file_size = parseInt(t[9]);
 
-    updatePlottingProgress(newPlot, 1);
+    if (faking == 0) {
+      updatePlottingProgress(newPlot, 1);
+    }
 
     console.log("phase 4 took: ", newPlot.plot_creation_times.phase4);
     console.log("file_size: ", newPlot.file_size);
