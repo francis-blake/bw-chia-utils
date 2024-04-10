@@ -69,7 +69,8 @@ async function processDisk(d) {
   if (files.length == 0) {
     let freeSpace;
     require("child_process").exec("df /media/joao/" + d, function (err, resp) {
-      freeSpace = resp.split(" ")[28] * 1024;
+      // freeSpace = resp.split(" ")[28] * 1024;
+      freeSpace = resp.split(/\s+/)[10] * 1024;
 
       if (freeSpace < minSize) {
         if (allFiles.length > 0) {
