@@ -20,6 +20,7 @@ let disks = [];
 let pattern = "";
 let minSize = 0;
 let plots_dir = "plots";
+let watch_dir = "plots";
 
 // Mandatoy ARGS
 if (!args["disks"]) {
@@ -50,6 +51,8 @@ function processArguments() {
   args["min-size"] ? (minSize = args["min-size"]) : (minSize = 0);
 
   args["dir"] ? (plots_dir = args["dir"]) : (plots_dir = "plots");
+
+  args["watch"] ? (watch_dir = args["watch"]) : (watch_dir = "plots");
 }
 
 analysePlots();
@@ -104,7 +107,7 @@ async function processDisk(d) {
 
 async function getFiles(d, p) {
   return new Promise((resolve, reject) => {
-    glob("/media/joao/" + d + "/" + plots_dir + "/" + p, function (err, files) {
+    glob("/media/joao/" + d + "/" + watch_dir + "/" + p, function (err, files) {
       if (err) {
         console.log(err);
       }
