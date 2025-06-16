@@ -20,6 +20,7 @@ let disks = [];
 let pattern = "";
 let minSize = 0;
 let plots_dir = "plots";
+
 let watch_dir = "plots";
 
 // Mandatoy ARGS
