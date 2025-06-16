@@ -34,7 +34,7 @@ async function processLineByLine() {
     // log.write(element) + "\n";
     fs.appendFile(plot_log_folder + "/plots.log", `${line}\n`, function () { });
     // console.log(`Line from file: ${line}`);
-    await sleep(800);
+    await sleep(200);
   }
 }
 
